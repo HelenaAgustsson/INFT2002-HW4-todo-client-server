@@ -33,6 +33,22 @@ router.post('/tasks', (request, response) => {
   else response.status(400).send('Missing task title');
 });
 
+// Example request body: { id: 4, title: "Ny oppgave", done: true }
+router.put('/tasks', (request, response) => {
+  const data = request.body;
+  if (
+    typeof data.id == 'number' &&
+    typeof data.title == 'string' &&
+    data.title.length != 0 &&
+    typeof data.done == 'boolean'
+  )
+    taskService
+      .update({ id: data.id, title: data.title, done: data.done })
+      .then(() => response.send())
+      .catch((error) => response.status(500).send(error));
+  else response.status(400).send('Missing task properties');
+});
+
 router.delete('/tasks/:id', (request, response) => {
   taskService
     .delete(Number(request.params.id))

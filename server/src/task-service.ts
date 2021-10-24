@@ -49,6 +49,23 @@ class TaskService {
   }
 
   /**
+   * Update given task.
+   */
+  update(task: Task) {
+    return new Promise<void>((resolve, reject) => {
+      pool.query(
+        'UPDATE Tasks SET title=?, done=? WHERE id=?',
+        [task.title, task.done, task.id],
+        (error, _results) => {
+          if (error) return reject(error);
+
+          resolve();
+        }
+      );
+    });
+  }
+
+  /**
    * Delete task with given id.
    */
   delete(id: number) {
