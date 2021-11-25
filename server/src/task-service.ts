@@ -12,7 +12,7 @@ class TaskService {
    */
   get(id: number) {
     return new Promise<Task | undefined>((resolve, reject) => {
-      pool.query('SELECT * FROM Tasks WHERE id = ?', [id], (error, results) => {
+      pool.query('SELECT * FROM Tasks2 WHERE id = ?', [id], (error, results) => {
         if (error) return reject(error);
 
         resolve(results[0]);
@@ -21,11 +21,11 @@ class TaskService {
   }
 
   /**
-   * Get all tasks.
+   * Get all tasks2.
    */
   getAll() {
     return new Promise<Task[]>((resolve, reject) => {
-      pool.query('SELECT * FROM Tasks', (error, results) => {
+      pool.query('SELECT * FROM Tasks2', (error, results) => {
         if (error) return reject(error);
 
         resolve(results);
@@ -40,7 +40,7 @@ class TaskService {
    */
   create(title: string) {
     return new Promise<number>((resolve, reject) => {
-      pool.query('INSERT INTO Tasks SET title=?', [title], (error, results) => {
+      pool.query('INSERT INTO Tasks2 SET title=?', [title], (error, results) => {
         if (error) return reject(error);
 
         resolve(Number(results.insertId));
@@ -54,7 +54,7 @@ class TaskService {
   update(task: Task) {
     return new Promise<void>((resolve, reject) => {
       pool.query(
-        'UPDATE Tasks SET title=?, done=? WHERE id=?',
+        'UPDATE Tasks2 SET title=?, done=? WHERE id=?',
         [task.title, task.done, task.id],
         (error, _results) => {
           if (error) return reject(error);
@@ -70,7 +70,7 @@ class TaskService {
    */
   delete(id: number) {
     return new Promise<void>((resolve, reject) => {
-      pool.query('DELETE FROM Tasks WHERE id = ?', [id], (error, results) => {
+      pool.query('DELETE FROM Tasks2 WHERE id = ?', [id], (error, results) => {
         if (error) return reject(error);
         if (!results.affectedRows) reject(new Error('No row deleted'));
 

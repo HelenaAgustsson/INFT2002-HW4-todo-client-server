@@ -9,7 +9,7 @@ class TaskList extends Component {
 
   render() {
     return (
-      <Card title="Tasks">
+      <Card title="Tasks Webutvikling">
         <Row>
           <Column>Title</Column>
           <Column>Done</Column>
@@ -56,10 +56,12 @@ class TaskList extends Component {
 
 class TaskNew extends Component {
   title = '';
+  id = 0;
 
   render() {
     return (
-      <Card title="New task">
+      <Card title="Ny task">
+        
         <Row>
           <Column width={1}>
             <Form.Label>Title:</Form.Label>
